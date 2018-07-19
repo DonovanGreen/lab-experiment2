@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+	<head>
+		<title>ArcAnimation</title>
+        <script src="webpage/js/jquery-1.11.0.min.js"></script>
+        <script src="webpage/js/purl.js"></script>
+        <script src="webpage/js/jquery.touchSwipe.min.js"></script>
+        <script src="webpage/js/font.js"></script>
+        <link rel="stylesheet" href="webpage/css/style.css">
+
+
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<script type="text/javascript">
+			
+		var now = new Date();
+		var millisTill10 = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 0, 0, 0) - now;
+		if (millisTill10 < 0) {
+		     millisTill10 += 86400000; // it's after 11pm, try 11pm tomorrow.
+		}
+		setTimeout(reload, millisTill10);
+
+		function reload()
+		{
+			location.reload();
+		}
+
+		function onStart()
+		{
+			document.getElementById("ArcAnimation").start();
+		}
+		function onStop()
+		{
+			document.getElementById("ArcAnimation").stop();
+		}
+		function onResume()
+		{
+			document.getElementById("ArcAnimation").resume();
+		}
+
+		function imageOpen(a)
+		{
+			if(a == 'ALLEVIATE SUFFERING')
+			{
+        window.location='webpage/summary.html';
+			}else
+			{
+				window.location='webpage/index.html?pagename='+a;
+			}
+		}
+		function  clickedOnLogo()
+		{
+			displayMore();
+		}
+		function pleaseTouch()
+		{
+			window.location='webpage/summary.html';
+		}
+        $(function () {
+            function openMenu() {
+                $("#accordian ul ul").slideUp();
+                //slide down the link list below the h3 clicked - only if its closed
+                if (!$(this).next().is(":visible")) {
+                    $(this).next().slideDown();
+                }
+            }
+
+            $("#accordian h3").click(function(){
+                ignoreClick = true;
+                //slide up all the link lists
+                $("#accordian ul ul").slideUp();
+                //slide down the link list below the h3 clicked - only if its closed
+                if(!$(this).next().is(":visible"))
+                {
+                    $(this).next().slideDown();
+                }
+            });
+        });
+        var menuTimeoutId =0;
+        function displayMore() {
+            menuTimeoutId = setTimeout(returnHome, 36000);
+
+            $("#accordian").animate({width: 'toggle'}, 500);
+
+        }
+
+        function returnHome() {
+            clearTimeout(menuTimeoutId);
+            $("#accordian").hide();
+        }
+		</script>
+		<style>
+		html, body{width:100%; height:100%;margin: 0;padding: 0;}
+		#flashContent{width:100%; height:100%; opacity:1; position:relative;-ms-touch-action: none;}
+		</style>
+	</head>
+	<body style="overflow:hidden;">
+		<div id="flashContent">
+			 <object id="ArcAnimation"  name="ArcAnimation"
+			  type="application/x-shockwave-flash" data="ArcAnimation.swf" width="100%" height="100%">
+			    <param name="movie" value="ArcAnimation.swf"/>
+			    <param name="quality" value="high"/>
+			    <param name="allowscriptaccess" value="always"/>
+			    <param name="wmode" value="transparent" />
+			    <param name="scale" value="showall" />
+			    <param name=FlashVars value="enableJS=true&animationSpeed=1.25&emailURL=http://localhost:8088/mail" />
+			    <a href="http://www.adobe.com/go/getflash">
+				<img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player"/>
+			    </a>
+			  </object>
+		</div>
+        <div id="accordian" style="display:none;z-index: 999">
+            <div class="more">
+                <img src="webpage/img/MORE-menuTxt.png"/>
+            </div>
+            <ul class="main_menu">
+                <li onclick="openMenu();">
+                    <h3>About</br>The Medicines Company</h3>
+                    <ul>
+                        <li onclick="window.location = 'More/index.html?pagename=0-Our%20Global%20Company';"><a href="#" style="padding-top: 8px">Our Global Company</a></li>
+                        <li onclick="window.location = 'More/index.html?pagename=0-Our%20History';"><a href="#" style="padding-top: 8px">Our</br>History</a></li>
+                        <li onclick="window.location = 'More/index.html?pagename=0-Our%20Values';"><a href="#" style="padding-top: 8px">Our</br>Values</a></li>
+                        <li onclick="window.location = 'More/index.html?pagename=0-Our%20Purpose';"><a href="#" style="padding-top: 8px">Our</br>Purpose</a></li>
+                    </ul>
+                </li>
+                <!-- we will keep this LI open by default -->
+                <li onclick="window.location = 'More/index.html?pagename=0-About%20The%20Lab';">
+                    <h3>About</br>The Lab</h3>
+                </li>
+                <li onclick="returnHome();">
+                    <h3>Return to</br>Exhibition</h3>
+                </li>
+            </ul>
+        </div>
+	</body>
+</html>
